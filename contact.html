@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact | Velvet Recipes</title>
+
+  <link rel="stylesheet" href="css/styles.css" />
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* CONTACT PAGE SPECIFIC */
+
+    .contact-section {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 100px 20px;
+      text-align: center;
+    }
+
+    .contact-section h2 {
+      font-size: 3rem;
+      font-family: "Playfair Display", serif;
+      margin-bottom: 10px;
+    }
+
+    .contact-section p {
+      color: #d8c3a5;
+      max-width: 600px;
+      margin-bottom: 40px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      width: 100%;
+      max-width: 450px;
+      background: rgba(245, 240, 230, 0.05);
+      padding: 35px;
+      border-radius: 16px;
+      border: 1px solid rgba(245, 240, 230, 0.15);
+      animation: glowPulse 4s ease-in-out infinite;
+    }
+
+    @keyframes glowPulse {
+      0% {
+        box-shadow: 0 0 15px rgba(245, 240, 230, 0.1);
+      }
+      50% {
+        box-shadow: 0 0 30px rgba(245, 240, 230, 0.25);
+      }
+      100% {
+        box-shadow: 0 0 15px rgba(245, 240, 230, 0.1);
+      }
+    }
+
+    input, textarea {
+      background: transparent;
+      border: none;
+      border-bottom: 2px solid rgba(245, 240, 230, 0.25);
+      color: #f5f0e6;
+      padding: 10px;
+      font-size: 1rem;
+      font-family: "Poppins", sans-serif;
+    }
+
+    input:focus, textarea:focus {
+      border-color: #d8c3a5;
+      outline: none;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    button {
+      margin-top: 15px;
+      align-self: center;
+      padding: 10px 35px;
+      border-radius: 50px;
+      border: 2px solid #f5f0e6;
+      background: transparent;
+      color: #f5f0e6;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #f5f0e6;
+      color: #0d0d0d;
+      box-shadow: 0 0 15px #f5f0e6;
+    }
+
+    .contact-info {
+      margin-top: 60px;
+      color: #d8c3a5;
+    }
+
+    .contact-info p {
+      margin: 6px 0;
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- NAV -->
+<nav class="glass-nav">
+  <a href="index.html" class="active">
+    <svg viewBox="0 0 24 24"><path d="M3 10L12 3l9 7v10a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>
+  </a>
+
+  <a href="recipes.html">
+    <svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+  </a>
+
+  <a href="contact.html">
+    <svg viewBox="0 0 24 24"><path d="M4 4h16v16H4z"/><path d="M22 6l-10 7L2 6"/></svg>
+  </a>
+</nav>
+
+<!-- CONTACT SECTION -->
+<section class="contact-section">
+  <h2>Get in Touch</h2>
+
+  <p>
+    Have a recipe to share? Feedback to give? Or just want to say hi — we'd love to hear from you.
+  </p>
+
+  <form>
+    <input type="text" placeholder="Your Name" required />
+    <input type="email" placeholder="Your Email" required />
+    <textarea placeholder="Your Message" required></textarea>
+    <button type="submit">Send Message</button>
+  </form>
+
+  <div class="contact-info">
+    <p>📍 Somewhere warm & cozy</p>
+    <p>📞 +91 000 000 0000</p>
+    <p>✉ velvetrecipes@gmail.com</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 Velvet Recipes. All Rights Reserved.</p>
+</footer>
+
+</body>
+</html>

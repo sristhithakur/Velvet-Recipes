@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Velvet Recipes</title>
+
+  <link rel="stylesheet" href="css/styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Poppins", sans-serif;
+      background: #0d0d0d;
+      color: #f5f0e6;
+      overflow-x: hidden;
+    }
+
+    /* =========================
+       HERO SECTION
+    ========================= */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 120px 20px 60px;
+      overflow: hidden;
+      isolation: isolate;
+    }
+
+    /* Background image layer */
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(rgba(40, 18, 14, 0.42), rgba(12, 8, 7, 0.82)),
+        url("images/f1.jpg") center/cover no-repeat;
+      transform: scale(1.05);
+      animation: slowZoom 18s ease-in-out infinite alternate;
+      z-index: -4;
+    }
+
+    /* Soft vignette */
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at center, transparent 35%, rgba(0,0,0,0.32) 100%),
+        linear-gradient(to bottom, rgba(0,0,0,0.12), rgba(0,0,0,0.45));
+      z-index: -3;
+    }
+
+    /* Ambient glow */
+    .hero-glow {
+      position: absolute;
+      width: 700px;
+      height: 700px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(216,195,165,0.08), transparent 60%);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      filter: blur(30px);
+      animation: pulseGlow 8s ease-in-out infinite;
+      z-index: -2;
+      pointer-events: none;
+    }
+
+    /* Subtle grain */
+    .hero-grain {
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(rgba(255,255,255,0.015) 1px, transparent 1px);
+      background-size: 4px 4px;
+      opacity: 0.18;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .hero-content {
+      max-width: 900px;
+      text-align: center;
+      animation: fadeUp 1.4s ease forwards;
+    }
+
+    .hero-kicker {
+      display: inline-block;
+      margin-bottom: 18px;
+      padding: 8px 16px;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #d8c3a5;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.08);
+      backdrop-filter: blur(10px);
+    }
+
+    .hero h1 {
+      margin: 0;
+      font-size: clamp(3rem, 9vw, 6.5rem);
+      line-height: 0.95;
+      font-family: "Playfair Display", serif;
+      font-weight: 700;
+      letter-spacing: -1px;
+      text-shadow: 0 10px 35px rgba(0,0,0,0.35);
+    }
+
+    .hero p {
+      margin: 22px auto 0;
+      max-width: 700px;
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      color: rgba(245,240,230,0.8);
+      line-height: 1.8;
+      letter-spacing: 0.5px;
+    }
+
+    .hero-actions {
+      margin-top: 34px;
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 24px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: all 0.35s ease;
+      border: 1px solid transparent;
+      min-width: 160px;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #d8c3a5, #b89572);
+      color: #111;
+      box-shadow: 0 10px 30px rgba(184,149,114,0.25);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 16px 40px rgba(184,149,114,0.32);
+    }
+
+    .btn-glass {
+      background: rgba(255,255,255,0.06);
+      color: #f5f0e6;
+      border: 1px solid rgba(255,255,255,0.1);
+      backdrop-filter: blur(14px);
+    }
+
+    .btn-glass:hover {
+      transform: translateY(-3px);
+      background: rgba(255,255,255,0.1);
+      border-color: rgba(216,195,165,0.22);
+    }
+
+    /* Floating stats strip */
+    .hero-strip {
+      margin: 48px auto 0;
+      display: inline-flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 14px;
+      padding: 14px;
+      border-radius: 24px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      backdrop-filter: blur(16px);
+      box-shadow: 0 10px 35px rgba(0,0,0,0.2);
+    }
+
+    .strip-item {
+      min-width: 130px;
+      padding: 10px 14px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.03);
+    }
+
+    .strip-item strong {
+      display: block;
+      font-size: 1rem;
+      color: #f5f0e6;
+      margin-bottom: 4px;
+    }
+
+    .strip-item span {
+      font-size: 0.82rem;
+      color: #d8c3a5;
+      letter-spacing: 0.4px;
+    }
+
+    /* Scroll indicator */
+    .scroll-indicator {
+      position: absolute;
+      bottom: 26px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: rgba(245,240,230,0.65);
+      font-size: 0.78rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      animation: floatHint 2.8s ease-in-out infinite;
+    }
+
+    .scroll-line {
+      width: 1px;
+      height: 38px;
+      background: linear-gradient(to bottom, rgba(216,195,165,0.8), transparent);
+    }
+
+    /* =========================
+       OPTIONAL NEXT SECTION PREVIEW
+    ========================= */
+    .intro-preview {
+      padding: 90px 20px;
+      background: #0d0d0d;
+      text-align: center;
+    }
+
+    .intro-preview h2 {
+      font-family: "Playfair Display", serif;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      margin-bottom: 14px;
+    }
+
+    .intro-preview p {
+      max-width: 700px;
+      margin: 0 auto;
+      color: rgba(245,240,230,0.75);
+      line-height: 1.8;
+    }
+
+    /* =========================
+       FOOTER
+    ========================= */
+    footer {
+      text-align: center;
+      padding: 24px 20px 40px;
+      background: #0d0d0d;
+      color: #d8c3a5;
+      font-size: 0.95rem;
+    }
+
+    /* =========================
+       ANIMATIONS
+    ========================= */
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(26px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes slowZoom {
+      from {
+        transform: scale(1.04);
+      }
+      to {
+        transform: scale(1.1);
+      }
+    }
+
+    @keyframes pulseGlow {
+      0%, 100% {
+        opacity: 0.6;
+        transform: translate(-50%, -50%) scale(1);
+      }
+      50% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1.06);
+      }
+    }
+
+    @keyframes floatHint {
+      0%, 100% {
+        transform: translateX(-50%) translateY(0);
+      }
+      50% {
+        transform: translateX(-50%) translateY(8px);
+      }
+    }
+
+    /* =========================
+       RESPONSIVE
+    ========================= */
+    @media (max-width: 768px) {
+      .hero {
+        padding-top: 110px;
+      }
+
+      .hero p {
+        font-size: 0.95rem;
+      }
+
+      .hero-actions {
+        gap: 12px;
+      }
+
+      .btn {
+        width: 100%;
+        max-width: 280px;
+      }
+
+      .hero-strip {
+        width: 100%;
+        border-radius: 20px;
+      }
+
+      .strip-item {
+        min-width: calc(50% - 8px);
+      }
+    }
+
+    @media (max-width: 520px) {
+      .strip-item {
+        min-width: 100%;
+      }
+
+      .hero-kicker {
+        font-size: 0.7rem;
+        letter-spacing: 1.5px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- NAV -->
+<nav class="glass-nav">
+  <a href="index.html" class="active">
+    <svg viewBox="0 0 24 24"><path d="M3 10L12 3l9 7v10a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>
+  </a>
+
+  <a href="recipes.html">
+    <svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+  </a>
+
+  <a href="contact.html">
+    <svg viewBox="0 0 24 24"><path d="M4 4h16v16H4z"/><path d="M22 6l-10 7L2 6"/></svg>
+  </a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-grain"></div>
+
+  <div class="hero-content">
+    <span class="hero-kicker">Luxury Home Cooking</span>
+    <h1>Velvet Recipes</h1>
+    <p>
+      Simple ingredients, elevated with warmth, elegance, and timeless flavor.
+      Discover recipes crafted to feel cinematic, comforting, and unforgettable.
+    </p>
+
+    <div class="hero-actions">
+      <a href="recipes.html" class="btn btn-primary">Explore Recipes</a>
+      <a href="contact.html" class="btn btn-glass">Contact Us</a>
+    </div>
+
+    <div class="hero-strip">
+      <div class="strip-item">
+        <strong>3+</strong>
+        <span>Signature Dishes</span>
+      </div>
+      <div class="strip-item">
+        <strong>Warm</strong>
+        <span>Elegant Flavors</span>
+      </div>
+      <div class="strip-item">
+        <strong>Timeless</strong>
+        <span>Kitchen Aesthetic</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="scroll-indicator">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- Optional continuation section -->
+<section class="intro-preview">
+  <h2>Where comfort meets sophistication</h2>
+  <p>
+    Every dish in Velvet Recipes is designed to feel inviting, indulgent, and beautifully simple —
+    from creamy pastas to warm soups and decadent desserts.
+  </p>
+</section>
+
+<footer>
+  <p>© 2026 Velvet Recipes</p>
+</footer>
+
+</body>
+</html>

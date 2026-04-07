@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Recipes | Velvet Recipes</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+
+<body>
+
+<nav class="glass-nav">
+  <a href="index.html">
+    <svg viewBox="0 0 24 24"><path d="M3 10L12 3l9 7v10a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>
+  </a>
+
+  <a href="recipes.html" class="active">
+    <svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+  </a>
+
+  <a href="contact.html">
+    <svg viewBox="0 0 24 24"><path d="M4 4h16v16H4z"/><path d="M22 6l-10 7L2 6"/></svg>
+  </a>
+</nav>
+
+<section class="recipes-section">
+  <h2>Our Recipes</h2>
+  <p class="recipes-subtitle">Click a dish to reveal the full velvet experience.</p>
+
+  <div class="recipes-grid">
+
+    <div class="recipe-card" onclick="openRecipe('pasta')">
+      <div class="recipe-card-glow"></div>
+      <div class="recipe-card-content">
+        <span class="recipe-tag">Signature</span>
+        <h3>Creamy Garlic Pasta</h3>
+        <p>Silky, rich, and beautifully aromatic.</p>
+      </div>
+    </div>
+
+    <div class="recipe-card" onclick="openRecipe('soup')">
+      <div class="recipe-card-glow"></div>
+      <div class="recipe-card-content">
+        <span class="recipe-tag">Comfort</span>
+        <h3>Velvet Tomato Soup</h3>
+        <p>Warm roasted depth with basil elegance.</p>
+      </div>
+    </div>
+
+    <div class="recipe-card" onclick="openRecipe('dessert')">
+      <div class="recipe-card-glow"></div>
+      <div class="recipe-card-content">
+        <span class="recipe-tag">Indulgence</span>
+        <h3>Chocolate Mousse</h3>
+        <p>Decadent, airy, and irresistibly smooth.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Modal -->
+<div id="modal" class="modal">
+  <div class="modal-box">
+    <button class="close-btn" onclick="closeModal()">✕</button>
+    <h3 id="title"></h3>
+    <div id="recipeContent"></div>
+  </div>
+</div>
+
+<footer>
+  <p>© 2026 Velvet Recipes</p>
+</footer>
+
+<script>
+  const recipes = {
+    pasta: {
+      title: "Creamy Garlic Pasta",
+      ingredients: [
+        "200g pasta",
+        "4 cloves garlic, minced",
+        "2 tbsp butter",
+        "1 cup heavy cream",
+        "1/2 cup parmesan cheese",
+        "Salt and black pepper",
+        "Fresh parsley for garnish"
+      ],
+      steps: [
+        "Boil pasta in salted water until al dente, then reserve 1/2 cup pasta water.",
+        "In a pan, melt butter and sauté garlic until fragrant.",
+        "Add cream and simmer gently for 2–3 minutes.",
+        "Stir in parmesan until smooth and silky.",
+        "Add cooked pasta and toss well. Use pasta water if needed to loosen the sauce.",
+        "Season with salt and pepper, garnish with parsley, and serve warm."
+      ]
+    },
+
+    soup: {
+      title: "Velvet Tomato Soup",
+      ingredients: [
+        "5 ripe tomatoes, chopped",
+        "1 onion, sliced",
+        "3 cloves garlic",
+        "2 tbsp olive oil",
+        "2 cups vegetable stock",
+        "1/4 cup cream",
+        "Salt and black pepper",
+        "Fresh basil leaves"
+      ],
+      steps: [
+        "Roast tomatoes, onion, and garlic with olive oil for 20 minutes at 200°C.",
+        "Transfer roasted vegetables to a pot and add vegetable stock.",
+        "Simmer for 10 minutes, then blend until smooth.",
+        "Return to heat and stir in cream.",
+        "Season with salt and pepper.",
+        "Serve hot with basil garnish."
+      ]
+    },
+
+    dessert: {
+      title: "Chocolate Mousse",
+      ingredients: [
+        "200g dark chocolate",
+        "1 cup heavy cream",
+        "2 tbsp sugar",
+        "2 eggs, separated",
+        "1 tsp vanilla extract",
+        "Chocolate shavings for garnish"
+      ],
+      steps: [
+        "Melt dark chocolate gently and let it cool slightly.",
+        "Whip cream with sugar until soft peaks form.",
+        "Whisk egg yolks into the melted chocolate with vanilla.",
+        "Beat egg whites separately until fluffy.",
+        "Fold whipped cream into the chocolate mixture.",
+        "Gently fold in the egg whites until airy and smooth.",
+        "Chill for 2 hours and garnish with chocolate shavings before serving."
+      ]
+    }
+  };
+
+  function openRecipe(key) {
+    const recipe = recipes[key];
+    document.getElementById("title").textContent = recipe.title;
+
+    const content = `
+      <div class="recipe-section">
+        <h4>Ingredients</h4>
+        <ul>
+          ${recipe.ingredients.map(item => `<li>${item}</li>`).join("")}
+        </ul>
+      </div>
+      <div class="recipe-section">
+        <h4>Method</h4>
+        <ol>
+          ${recipe.steps.map(step => `<li>${step}</li>`).join("")}
+        </ol>
+      </div>
+    `;
+
+    document.getElementById("recipeContent").innerHTML = content;
+    document.getElementById("modal").classList.add("show");
+  }
+
+  function closeModal() {
+    document.getElementById("modal").classList.remove("show");
+  }
+
+  window.addEventListener("click", function(e) {
+    const modal = document.getElementById("modal");
+    if (e.target === modal) {
+      closeModal();
+    }
+  });
+</script>
+
+</body>
+</html>
